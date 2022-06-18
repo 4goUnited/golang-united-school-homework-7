@@ -104,3 +104,39 @@ func Test_NewMatrix(t *testing.T) {
 		}
 	}
 }
+
+func Test_RowsMatrix(t *testing.T) {
+	tData := map[string]struct {
+		m Matrix
+		expRows [][]int
+	}{
+		"nil_matrix": {Matrix{}, [][]int{}},
+		"valid_matr_1x1": {Matrix{1, 1, []int{1}}, [][]int{{1}}}}
+
+	for name, tcase := range tData {
+		got := tcase.m.Rows()
+		if !reflect.DeepEqual(got, tcase.expRows) {
+			t.Errorf("[%s] expected: %v, got %v", name, tcase.expRows, got)
+		}
+	}
+}
+
+func Test_ColsMatrix(t *testing.T) {
+	tData := map[string]struct {
+		m Matrix
+		expCols [][]int
+	}{
+		"nil_matrix": {Matrix{}, [][]int{}},
+		"valid_matr_1x1": {Matrix{1, 1, []int{1}}, [][]int{{1}}}}
+
+	for name, tcase := range tData {
+		got := tcase.m.Cols()
+		if !reflect.DeepEqual(got, tcase.expCols) {
+			t.Errorf("[%s] expected: %v, got %v", name, tcase.expCols, got)
+		}
+	}
+}
+
+
+
+
