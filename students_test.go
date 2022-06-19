@@ -137,6 +137,25 @@ func Test_ColsMatrix(t *testing.T) {
 	}
 }
 
-
-
-
+func Test_SetMatrix(t *testing.T) {
+	tData := map[string]struct {
+		m Matrix
+		row int
+		col int
+		value int
+		expMatrix Matrix
+		expBool bool
+	}{
+		"nil_matrix": {Matrix{}, 1, 1, 1, Matrix{}, false},
+		"valid_matr_1x1": {Matrix{1, 1, []int{1}}, 0, 0, 10, Matrix{1, 1, []int{10}}, true}}
+	
+	for name, tcase := range tData {
+		got := tcase.m.Set(tcase.row, tcase.col, tcase.value)
+		if !reflect.DeepEqual(tcase.m, tcase.expMatrix) {
+			t.Errorf("[%s] expected: %v, got %v", name, tcase.m, tcase.expMatrix)
+		}
+		if got != tcase.expBool {
+			t.Errorf("[%s] expected: %t, got %t", name, tcase.expBool, got)
+		}
+	}
+}
